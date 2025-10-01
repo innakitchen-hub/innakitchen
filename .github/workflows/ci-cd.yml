@@ -8,108 +8,99 @@ on:
 permissions:
   contents: read
   packages: write
+  id-token: write
 
-env:
-  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/innakitchen
-  DOCKER_PLATFORMS: linux/amd64
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
-    name: E2E (Cypress)
+    name: E2E (Cypress via Docker Compose)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      # สร้างอิมเมจ dev สำหรับ service web ใน docker-compose.yml
-      - name: Build image (dev)
-        run: docker build -t innakitchen:dev .
-
-      # รัน web ผ่าน Docker Compose (เลี่ยงชื่อชน)
+      # ถ้า docker-compose.yml มี build: . ให้ใช้ up -d ได้เลย
       - name: Start web via Compose
         run: docker compose up -d web
 
-      - name: Wait for web (up to 30s)
+      - name: Wait for web
         run: |
           for i in {1..30}; do
-            if curl -fsS http://localhost:8080 > /dev/null; then
-              echo "Web is up"
-              exit 0
+            if curl -fsS http://localhost:8080 >/dev/null; then
+              echo "web is up"; exit 0
             fi
-            sleep 1
+            echo "waiting..."; sleep 2
           done
-          echo "Web did not become ready in time" >&2
-          docker compose logs web || true
-          exit 1
+          echo "web not responding"; docker compose logs web || true; exit 1
 
-      # รัน Cypress ผ่าน service cypress ใน compose
-      - name: Run Cypress via Docker Compose
+      - name: Run Cypress (Docker)
         run: docker compose run --rm cypress
 
-      - name: Print logs (always)
-        if: always()
-        run: docker compose logs --no-color || true
-
-      - name: Tear down (always)
+      - name: Stop services
         if: always()
         run: docker compose down -v
 
   build_and_push:
-    name: Build & Push GHCR
+    name: Build & Push to GHCR
     needs: test
     runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/innakitchen
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      # ใช้ GITHUB_TOKEN สำหรับ push ไป GHCR (ต้องมี packages: write)
-      - name: Log in to GHCR
+      - name: Login to GHCR (using GITHUB_TOKEN)
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels)
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.IMAGE_NAME }}
-          tags: |
-            type=raw,value=latest
-            type=sha
+      - name: Set tags
+        id: vars
+        run: |
+          echo "TAG=latest" >> $GITHUB_OUTPUT
+          echo "SHA_TAG=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
 
-      - name: Build and push
+      - name: Build & Push
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          platforms: ${{ env.DOCKER_PLATFORMS }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.TAG }}
+            ${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.SHA_TAG }}
 
   deploy:
-    name: Deploy to Mac mini
+    name: Deploy to Mac mini (via Cloudflare SSH)
     needs: build_and_push
     runs-on: ubuntu-latest
     steps:
-      - name: SSH into Mac mini and deploy
-        uses: appleboy/ssh-action@v1.2.0
+      - name: Install cloudflared
+        run: |
+          curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 \
+            -o cloudflared
+          chmod +x cloudflared
+          sudo mv cloudflared /usr/local/bin/
+
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.9.0
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT || 22 }}
-          script_stop: true
-          script: |
-            set -e
-            cd ${{ secrets.COMPOSE_PROJECT_DIR }}
-            # สำหรับฝั่ง Mac mini ให้ใช้ PAT ที่มีอย่างน้อย read:packages
-            docker login ghcr.io -u "${{ github.repository_owner }}" -p "${{ secrets.GHCR_READ_TOKEN }}"
-            docker compose -f docker-compose.prod.yml pull
-            docker compose -f docker-compose.prod.yml up -d
-            docker image prune -f
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Deploy over SSH via Cloudflare Tunnel
+        env:
+          GH_USER: ${{ github.repository_owner }}
+          GH_PAT_READ: ${{ secrets.GHCR_READ_TOKEN }}
+        run: |
+          ssh -o "ProxyCommand cloudflared access ssh --hostname ${{ secrets.SSH_HOST }}" \
+              -o StrictHostKeyChecking=no \
+              -p ${{ secrets.SSH_PORT }} \
+              ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+              "/bin/bash -lc 'cd /Users/korakod/Desktop/innakitchen && \
+                docker login ghcr.io -u ${GH_USER} -p ${GH_PAT_READ} && \
+                docker compose -f docker-compose.prod.yml pull && \
+                docker compose -f docker-compose.prod.yml up -d && \
+                docker image prune -f'"
