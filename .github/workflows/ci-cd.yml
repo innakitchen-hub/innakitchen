@@ -29,20 +29,26 @@ jobs:
       - name: Run web container
         run: docker run -d --rm --name innakitchen-web -p 8080:80 innakitchen:dev
 
-      - name: Wait for web
+      - name: Wait for web (up to 30s)
         run: |
           for i in {1..30}; do
-            curl -fsS http://localhost:8080 && break
+            if curl -fsS http://localhost:8080 > /dev/null; then
+              echo "Web is up"
+              exit 0
+            fi
             sleep 1
           done
+          echo "Web did not become ready in time" >&2
+          docker logs innakitchen-web || true
+          exit 1
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        env:
-          CYPRESS_baseUrl: http://localhost:8080
-        with:
-          browser: chrome
-          config: video=false
+      # ใช้ Cypress ผ่าน Docker Compose เพื่อตัดปัญหา lockfile
+      - name: Run Cypress via Docker Compose
+        run: docker compose run --rm cypress
+
+      - name: Stop web container
+        if: always()
+        run: docker stop innakitchen-web || true
 
   build_and_push:
     name: Build & Push GHCR
@@ -59,6 +65,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
+          # ถ้ามี GHCR_READ_TOKEN จะใช้ตัวนั้น; ถ้าไม่มีก็ fallback เป็น github.token
           password: ${{ secrets.GHCR_READ_TOKEN || github.token }}
 
       - name: Extract metadata (tags, labels)
@@ -95,9 +102,6 @@ jobs:
           script: |
             set -e
             cd ${{ secrets.COMPOSE_PROJECT_DIR }}
-            # Ensure REGISTRY_OWNER is set for compose variable substitution
-            export REGISTRY_OWNER="${{ github.repository_owner }}"
-            echo "Using REGISTRY_OWNER=${REGISTRY_OWNER}"
             docker login ghcr.io -u "${{ github.repository_owner }}" -p "${{ secrets.GHCR_READ_TOKEN }}"
             docker compose -f docker-compose.prod.yml pull
             docker compose -f docker-compose.prod.yml up -d
