@@ -1,0 +1,7 @@
+services:
+  web:
+    image: ghcr.io/innakitchen-hub/innakitchen:latest
+    container_name: innakitchen-web
+    ports:
+      - "8080:80"
+    restart: unless-stopped

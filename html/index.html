@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>อินนา ครัวน้อย อร่อยมาก — เมนูแนะนำ</title>
+  <meta name="description" content="อินนา ครัวน้อย อร่อยมาก — เมนูแนะนำ 5 รายการบนหน้าเดียว สั่งง่าย อร่อยทุกจาน" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: 'Kanit', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans Thai', 'Noto Sans', sans-serif; }
+    /* Glass card */
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.6));
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .dark .glass { background: linear-gradient(180deg, rgba(17,24,39,.6), rgba(17,24,39,.5)); }
+    .shine { position: relative; overflow: hidden; }
+    .shine::after { content:''; position:absolute; inset: -150% -150% auto auto; width:50%; height:200%; rotate:20deg; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 50%, rgba(255,255,255,0) 100%); animation: sweep 6s linear infinite; }
+    @keyframes sweep { 0%{ transform: translateX(-200%);} 100%{ transform: translateX(200%);} }
+  </style>
+  <!-- Open Graph -->
+  <meta property="og:title" content="อินนา ครัวน้อย อร่อยมาก — เมนูแนะนำ" />
+  <meta property="og:description" content="ดูเมนูยอดนิยม 5 รายการในหน้าเดียว คลิกดูรายละเอียดและสั่งผ่าน LINE MAN ได้ทันที" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://app.innakitchen.com" />
+</head>
+<body class="bg-gradient-to-br from-orange-50 via-amber-50 to-white text-gray-900 dark:from-neutral-900 dark:via-neutral-900 dark:to-neutral-900 dark:text-neutral-100">
+  <!-- Sticky Order Bar -->
+  <div class="fixed bottom-4 inset-x-0 z-40 flex justify-center">
+    <a href="#order" class="glass shine shadow-xl inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold ring-1 ring-black/5 hover:scale-[1.02] transition">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.372l2.59 11.645A3.75 3.75 0 0 0 9.86 18h7.64a3.75 3.75 0 0 0 3.648-2.84l1.367-5.486A.75.75 0 0 0 21.8 8.99l-1.367 5.486A2.25 2.25 0 0 1 17.5 16.5H9.86a2.25 2.25 0 0 1-2.206-1.79L7.285 12h12.215a.75.75 0 0 0 0-1.5H6.95L5.83 5.25h15.92a.75.75 0 0 0 0-1.5H4.5a.75.75 0 0 0-.733.57L3.887 5.25H2.25zM9 21a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm9 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>
+      สั่งง่ายใน 1 นาที
+    </a>
+  </div>
+
+  <!-- Header / Hero -->
+  <header class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(40rem_20rem_at_20%_20%,rgba(251,146,60,.25),transparent),radial-gradient(30rem_16rem_at_90%_10%,rgba(234,179,8,.2),transparent)] dark:bg-[radial-gradient(40rem_20rem_at_20%_20%,rgba(234,179,8,.15),transparent),radial-gradient(30rem_16rem_at_90%_10%,rgba(168,85,247,.15),transparent)]"></div>
+    <nav class="mx-auto flex max-w-6xl items-center justify-between p-4 lg:p-6">
+      <div class="flex items-center gap-3">
+        <div class="rounded-2xl bg-amber-500 text-white w-10 h-10 grid place-items-center shadow-md">อ</div>
+        <div class="leading-tight">
+          <div class="font-extrabold text-lg">อินนา ครัวน้อย อร่อยมาก</div>
+          <div class="text-xs text-gray-600/80 dark:text-neutral-300">ครัวโฮมเมด • สะอาด • ทำสดทุกออเดอร์</div>
+        </div>
+      </div>
+      <div class="hidden md:flex items-center gap-4 text-sm">
+        <a href="#menu" class="hover:underline">เมนู</a>
+        <a href="#about" class="hover:underline">เรื่องของเรา</a>
+        <a href="#order" class="hover:underline">สั่งเลย</a>
+      </div>
+    </nav>
+
+    <section class="mx-auto max-w-6xl px-4 pb-10 pt-6 lg:pt-10">
+      <div class="grid lg:grid-cols-2 gap-8 items-center">
+        <div>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
+            อร่อยทันใจ เมนูเด่น <span class="text-amber-600">5 รายการ</span> —
+            ดูครบในหน้าเดียว
+          </h1>
+          <p class="mt-4 text-gray-700/90 dark:text-neutral-300 max-w-prose">
+            เราคัดเมนูขายดีและซิกเนเจอร์มาให้เลือกแบบจุใจ คลิกที่การ์ดเพื่อดูวัตถุดิบ/สารก่อภูมิแพ้
+            และกด “สั่งเลย” ได้ทันที
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#menu" class="inline-flex items-center gap-2 rounded-full bg-amber-600 px-5 py-3 text-white font-semibold shadow hover:bg-amber-700 transition">
+              ดูเมนูทั้งหมด
+            </a>
+            <a href="#order" class="inline-flex items-center gap-2 rounded-full ring-1 ring-black/10 px-5 py-3 font-semibold hover:bg-white/60 glass transition">
+              สั่งตอนนี้
+            </a>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="aspect-[4/3] w-full rounded-3xl shadow-2xl glass border border-white/50 overflow-hidden">
+            <!-- Hero image placeholder (replace src with real food photo URL) -->
+            <img alt="ภาพรวมเมนูร้านอินนา" class="h-full w-full object-cover" src="data:image/svg+xml;utf8,\
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'>\
+              <defs>\
+                <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>\
+                  <stop offset='0%' stop-color='%23ffd7a1'/>\
+                  <stop offset='100%' stop-color='%23fff'/>\
+                </linearGradient>\
+              </defs>\
+              <rect width='800' height='600' fill='url(%23g)'/>\
+              <g fill='%23a16207' opacity='.5'>\
+                <circle cx='120' cy='120' r='90'/>\
+                <circle cx='420' cy='220' r='120'/>\
+                <circle cx='650' cy='140' r='70'/>\
+                <circle cx='300' cy='470' r='110'/>\
+              </g>\
+              <text x='50' y='560' font-size='36' font-family='Kanit' fill='%238a4b0a'>ใส่ภาพเมนูรวมของร้านตรงนี้</text>\
+            </svg>">
+          </div>
+          <div class="absolute -bottom-4 right-6 hidden sm:flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-lg ring-1 ring-black/5">
+            <span class="inline-block h-2 w-2 rounded-full bg-green-500"></span>
+            <span class="text-sm">ปรุงสดใหม่ ขณะนี้</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <!-- Menu Grid (5 items on one page) -->
+  <main id="menu" class="mx-auto max-w-6xl px-4 py-10">
+    <div class="flex items-end justify-between mb-6">
+      <h2 class="text-2xl font-bold">เมนูแนะนำวันนี้</h2>
+      <div class="text-sm text-gray-600 dark:text-neutral-300">*คลิกการ์ดเพื่อดูรายละเอียด</div>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <!-- Item 1 -->
+      <article class="group glass rounded-3xl p-3 shadow hover:shadow-xl transition border border-white/50">
+        <div class="relative overflow-hidden rounded-2xl">
+          <img alt="ข้าวกะเพราหมูกรอบ" class="h-48 w-full object-cover group-hover:scale-105 transition" src="https://images.unsplash.com/photo-1604908176997-4318f7a0141b?q=80&w=1200&auto=format&fit=crop" />
+          <div class="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-amber-600/90 px-3 py-1 text-xs font-bold text-white">Signature</div>
+        </div>
+        <div class="p-3">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="text-lg font-semibold">ข้าวกะเพราหมูกรอบ</h3>
+            <div class="text-amber-700 dark:text-amber-400 font-bold">฿89</div>
+          </div>
+          <p class="mt-1 text-sm text-gray-700/90 dark:text-neutral-300 line-clamp-2">หมูกรอบผัดพริกกระเทียมหอมใบกะเพรา เผ็ดหอมแบบไทยแท้</p>
+          <div class="mt-3 flex items-center justify-between">
+            <div class="flex items-center gap-1 text-xs text-gray-600 dark:text-neutral-300">
+              <span>เผ็ด</span>
+              <span>🌶️🌶️</span>
+              <span class="ml-2">โปรตีนสูง</span>
+            </div>
+            <button class="btn-detail text-sm font-semibold underline" data-id="kaprao-crisp">รายละเอียด</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Item 2 -->
+      <article class="group glass rounded-3xl p-3 shadow hover:shadow-xl transition border border-white/50">
+        <div class="relative overflow-hidden rounded-2xl">
+          <img alt="สปาเก็ตตี้คาโบนารา" class="h-48 w-full object-cover group-hover:scale-105 transition" src="https://images.unsplash.com/photo-1523986371872-9d3ba2e2f642?q=80&w=1200&auto=format&fit=crop" />
+          <div class="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-emerald-600/90 px-3 py-1 text-xs font-bold text-white">ขายดี</div>
+        </div>
+        <div class="p-3">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="text-lg font-semibold">สปาเก็ตตี้คาโบนารา</h3>
+            <div class="text-amber-700 dark:text-amber-400 font-bold">฿109</div>
+          </div>
+          <p class="mt-1 text-sm text-gray-700/90 dark:text-neutral-300 line-clamp-2">ครีมซอสหอมมัน เบคอนกรอบ ไข่ออนเซ็นเพิ่มความกลมกล่อม</p>
+          <div class="mt-3 flex items-center justify-between">
+            <div class="flex items-center gap-1 text-xs text-gray-600 dark:text-neutral-300">
+              <span>ไม่เผ็ด</span>
+              <span>🧀 เข้มข้น</span>
+            </div>
+            <button class="btn-detail text-sm font-semibold underline" data-id="carbonara">รายละเอียด</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Item 3 -->
+      <article class="group glass rounded-3xl p-3 shadow hover:shadow-xl transition border border-white/50">
+        <div class="relative overflow-hidden rounded-2xl">
+          <img alt="ยำแซลมอนแซ่บ" class="h-48 w-full object-cover group-hover:scale-105 transition" src="https://images.unsplash.com/photo-1553621042-f6e147245754?q=80&w=1200&auto=format&fit=crop" />
+        </div>
+        <div class="p-3">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="text-lg font-semibold">ยำแซลมอนแซ่บ</h3>
+            <div class="text-amber-700 dark:text-amber-400 font-bold">฿139</div>
+          </div>
+          <p class="mt-1 text-sm text-gray-700/90 dark:text-neutral-300 line-clamp-2">แซลมอนสดซอยคลุกน้ำยำซีฟู้ด หอมมะนาว พริกสด</p>
+          <div class="mt-3 flex items-center justify-between">
+            <div class="flex items-center gap-1 text-xs text-gray-600 dark:text-neutral-300">
+              <span>เผ็ดมาก</span>
+              <span>🌶️🌶️🌶️</span>
+            </div>
+            <button class="btn-detail text-sm font-semibold underline" data-id="salmon-yum">รายละเอียด</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Item 4 -->
+      <article class="group glass rounded-3xl p-3 shadow hover:shadow-xl transition border border-white/50">
+        <div class="relative overflow-hidden rounded-2xl">
+          <img alt="เกี๊ยวกุ้งลวกจิ้ม" class="h-48 w-full object-cover group-hover:scale-105 transition" src="https://images.unsplash.com/photo-1604908554029-4e4bdc0aafbc?q=80&w=1200&auto=format&fit=crop" />
+        </div>
+        <div class="p-3">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="text-lg font-semibold">เกี๊ยวกุ้งลวกจิ้ม</h3>
+            <div class="text-amber-700 dark:text-amber-400 font-bold">฿79</div>
+          </div>
+          <p class="mt-1 text-sm text-gray-700/90 dark:text-neutral-300 line-clamp-2">กุ้งเด้งๆ ไส้แน่น เสิร์ฟพร้อมน้ำจิ้มซีฟู้ดสูตรพิเศษ</p>
+          <div class="mt-3 flex items-center justify-between">
+            <div class="flex items-center gap-1 text-xs text-gray-600 dark:text-neutral-300">
+              <span>ไม่เผ็ด</span>
+              <span>💧 สดชื่น</span>
+            </div>
+            <button class="btn-detail text-sm font-semibold underline" data-id="shrimp-dumpling">รายละเอียด</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Item 5 -->
+      <article class="group glass rounded-3xl p-3 shadow hover:shadow-xl transition border border-white/50 sm:col-span-2 lg:col-span-1">
+        <div class="relative overflow-hidden rounded-2xl">
+          <img alt="ข้าวหน้าหมูทอดคาราอาเกะ" class="h-48 w-full object-cover group-hover:scale-105 transition" src="https://images.unsplash.com/photo-1526312426976-593c2b999d4d?q=80&w=1200&auto=format&fit=crop" />
+          <div class="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-rose-600/90 px-3 py-1 text-xs font-bold text-white">ใหม่</div>
+        </div>
+        <div class="p-3">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="text-lg font-semibold">ข้าวหน้าหมูทอดคาราอาเกะ</h3>
+            <div class="text-amber-700 dark:text-amber-400 font-bold">฿99</div>
+          </div>
+          <p class="mt-1 text-sm text-gray-700/90 dark:text-neutral-300 line-clamp-2">หมูชิ้นหมักซอสญี่ปุ่น ชุบแป้งทอดกรอบ ราดมายองเนส</p>
+          <div class="mt-3 flex items-center justify-between">
+            <div class="flex items-center gap-1 text-xs text-gray-600 dark:text-neutral-300">
+              <span>ไม่เผ็ด</span>
+              <span>🍚 อิ่มคุ้ม</span>
+            </div>
+            <button class="btn-detail text-sm font-semibold underline" data-id="karaage-don">รายละเอียด</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- About & Order CTA -->
+  <section id="about" class="mx-auto max-w-6xl px-4 pb-16">
+    <div class="grid md:grid-cols-2 gap-6 items-center">
+      <div class="glass rounded-3xl p-6 border border-white/50">
+        <h3 class="text-xl font-bold">เรื่องของเรา</h3>
+        <p class="mt-2 text-gray-700/90 dark:text-neutral-300">เราใส่ใจวัตถุดิบ คัดสรรของสดใหม่ทุกวัน ปรุงสะอาดในครัวที่ได้มาตรฐาน และเน้นรสมือแบบโฮมเมดที่ทุกคนคุ้นเคย</p>
+        <ul class="mt-3 text-sm space-y-2 text-gray-700/90 dark:text-neutral-300">
+          <li>• ทำสดทุกออเดอร์</li>
+          <li>• ระบุ/งดวัตถุดิบได้ (แจ้งในหมายเหตุ)</li>
+          <li>• มีตัวเลือกไม่เผ็ด/น้อยหวาน</li>
+        </ul>
+      </div>
+      <div id="order" class="glass rounded-3xl p-6 border border-white/50">
+        <h3 class="text-xl font-bold">สั่งเลย</h3>
+        <p class="mt-2 text-gray-700/90 dark:text-neutral-300">เลือกเมนูจากด้านบน แล้วกดปุ่มด้านล่างเพื่อไปยังหน้าสั่งซื้อ</p>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a class="inline-flex items-center justify-center rounded-xl px-5 py-3 text-white font-semibold bg-emerald-600 hover:bg-emerald-700 shadow" href="https://lin.ee/" target="_blank" rel="noopener">สั่งผ่าน LINE MAN</a>
+          <a class="inline-flex items-center justify-center rounded-xl px-5 py-3 font-semibold ring-1 ring-black/10 glass" href="https://page.line.me/" target="_blank" rel="noopener">ทักหาเราใน LINE OA</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-black/5 py-8 text-center text-sm text-gray-600 dark:text-neutral-400">
+    © <span id="y"></span> อินนา ครัวน้อย อร่อยมาก • เขตบริการ: ใกล้จุดรับส่งของร้าน • โทร 08x-xxx-xxxx
+  </footer>
+
+  <!-- Modal for details -->
+  <dialog id="detailModal" class="rounded-2xl p-0 w-[min(92vw,680px)] shadow-2xl backdrop:bg-black/40">
+    <div class="glass border border-white/50 rounded-2xl overflow-hidden">
+      <div class="flex items-center justify-between px-5 py-4 border-b border-black/5">
+        <h4 id="modalTitle" class="text-lg font-bold">รายละเอียดเมนู</h4>
+        <button id="closeModal" class="rounded-full px-3 py-1 text-sm ring-1 ring-black/10 hover:bg-white/60">ปิด</button>
+      </div>
+      <div class="grid md:grid-cols-2 gap-0">
+        <img id="modalImg" alt="" class="h-56 md:h-full w-full object-cover"/>
+        <div class="p-5 space-y-3">
+          <p id="modalDesc" class="text-sm text-gray-700/90 dark:text-neutral-300"></p>
+          <div>
+            <div class="text-xs uppercase tracking-wide text-gray-500">วัตถุดิบหลัก</div>
+            <ul id="modalIngredients" class="mt-1 list-disc list-inside text-sm"></ul>
+          </div>
+          <div>
+            <div class="text-xs uppercase tracking-wide text-gray-500">สารก่อภูมิแพ้ (ถ้ามี)</div>
+            <p id="modalAllergen" class="text-sm"></p>
+          </div>
+          <div class="flex items-center justify-between pt-2">
+            <div id="modalPrice" class="text-xl font-extrabold text-amber-700 dark:text-amber-400"></div>
+            <a href="https://lin.ee/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-xl bg-amber-600 px-4 py-2 text-white font-semibold hover:bg-amber-700">
+              สั่งเมนูนี้
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Data for 5 menu items (แก้ไขชื่อ/ราคา/รูปภาพได้ตามจริง)
+    const MENU = {
+      'kaprao-crisp': {
+        title: 'ข้าวกะเพราหมูกรอบ',
+        price: 89,
+        img: 'https://images.unsplash.com/photo-1604908176997-4318f7a0141b?q=80&w=1200&auto=format&fit=crop',
+        desc: 'หมูกรอบคั่วพริกกระเทียม ใบกะเพราหอมๆ ราดข้าวร้อนๆ',
+        ingredients: ['หมูกรอบ', 'กะเพรา', 'พริก', 'กระเทียม', 'ข้าวหอมมะลิ'],
+        allergen: 'ซีอิ๊ว/ถั่วเหลือง',
+      },
+      'carbonara': {
+        title: 'สปาเก็ตตี้คาโบนารา',
+        price: 109,
+        img: 'https://images.unsplash.com/photo-1523986371872-9d3ba2e2f642?q=80&w=1200&auto=format&fit=crop',
+        desc: 'ครีมซอสชีส ไข่ออนเซ็น และเบคอนกรอบเข้มข้น',
+        ingredients: ['สปาเก็ตตี้', 'ครีม', 'ชีส', 'เบคอน', 'ไข่'],
+        allergen: 'นม/ไข่/กลูเตน',
+      },
+      'salmon-yum': {
+        title: 'ยำแซลมอนแซ่บ',
+        price: 139,
+        img: 'https://images.unsplash.com/photo-1553621042-f6e147245754?q=80&w=1200&auto=format&fit=crop',
+        desc: 'เนื้อปลาแซลมอนสดคลุกน้ำยำซีฟู้ด จี๊ดจ๊าดสะใจ',
+        ingredients: ['แซลมอน', 'พริก', 'กระเทียม', 'มะนาว', 'น้ำปลา'],
+        allergen: 'ปลา',
+      },
+      'shrimp-dumpling': {
+        title: 'เกี๊ยวกุ้งลวกจิ้ม',
+        price: 79,
+        img: 'https://images.unsplash.com/photo-1604908554029-4e4bdc0aafbc?q=80&w=1200&auto=format&fit=crop',
+        desc: 'แป้งบางไส้กุ้งแน่น เสิร์ฟคู่ซอสซีฟู้ด',
+        ingredients: ['กุ้ง', 'แป้งเกี๊ยว', 'กระเทียมเจียว'],
+        allergen: 'กุ้ง/กลูเตน',
+      },
+      'karaage-don': {
+        title: 'ข้าวหน้าหมูทอดคาราอาเกะ',
+        price: 99,
+        img: 'https://images.unsplash.com/photo-1526312426976-593c2b999d4d?q=80&w=1200&auto=format&fit=crop',
+        desc: 'หมูทอดกรอบนอกนุ่มใน ราดซอสญี่ปุ่นหอมๆ',
+        ingredients: ['หมู', 'แป้งข้าวโพด', 'ซอสโชยุ', 'มายองเนส'],
+        allergen: 'ถั่วเหลือง/ไข่',
+      },
+    };
+
+    const modal = document.getElementById('detailModal');
+    const titleEl = document.getElementById('modalTitle');
+    const imgEl = document.getElementById('modalImg');
+    const descEl = document.getElementById('modalDesc');
+    const ingEl = document.getElementById('modalIngredients');
+    const alEl = document.getElementById('modalAllergen');
+    const priceEl = document.getElementById('modalPrice');
+
+    document.querySelectorAll('.btn-detail').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const d = MENU[btn.dataset.id];
+        if (!d) return;
+        titleEl.textContent = d.title;
+        imgEl.src = d.img;
+        imgEl.alt = d.title;
+        descEl.textContent = d.desc;
+        ingEl.innerHTML = d.ingredients.map(i => `<li>${i}</li>`).join('');
+        alEl.textContent = d.allergen || '-';
+        priceEl.textContent = `฿${d.price}`;
+        modal.showModal();
+      });
+    });
+    document.getElementById('closeModal').addEventListener('click', () => modal.close());
+
+    // Smooth scroll for in-page links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+
+  <!-- SEO: Structured data (Restaurant & MenuItem) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "อินนา ครัวน้อย อร่อยมาก",
+    "url": "https://app.innakitchen.com",
+    "servesCuisine": ["Thai", "Fusion"],
+    "hasMenu": {
+      "@type": "Menu",
+      "name": "เมนูแนะนำ 5 รายการ",
+      "hasMenuItem": [
+        {"@type": "MenuItem", "name": "ข้าวกะเพราหมูกรอบ", "offers": {"@type": "Offer", "priceCurrency": "THB", "price": "89"}},
+        {"@type": "MenuItem", "name": "สปาเก็ตตี้คาโบนารา", "offers": {"@type": "Offer", "priceCurrency": "THB", "price": "109"}},
+        {"@type": "MenuItem", "name": "ยำแซลมอนแซ่บ", "offers": {"@type": "Offer", "priceCurrency": "THB", "price": "139"}},
+        {"@type": "MenuItem", "name": "เกี๊ยวกุ้งลวกจิ้ม", "offers": {"@type": "Offer", "priceCurrency": "THB", "price": "79"}},
+        {"@type": "MenuItem", "name": "ข้าวหน้าหมูทอดคาราอาเกะ", "offers": {"@type": "Offer", "priceCurrency": "THB", "price": "99"}}
+      ]
+    }
+  }
+  </script>
+</body>
+</html>
